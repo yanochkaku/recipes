@@ -47,6 +47,29 @@ namespace Recipes.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "bb5e0b98-4cee-46f5-8051-a1e2648ce61e",
+                            ConcurrencyStamp = "5e88b123-95da-4e2c-9577-a8d717e30628",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "88b02695-c940-414e-94e5-2dff32ab05c9",
+                            ConcurrencyStamp = "7759f989-0a76-4dd0-a9c3-d7401b63f6d3",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = "1a850c5a-28e8-4b76-b852-00622d7c4ad3",
+                            ConcurrencyStamp = "5982aaf9-2015-465e-ad50-fba71535d80f",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -136,6 +159,38 @@ namespace Recipes.Core.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "b3664d9e-54ce-4817-94da-2a70b1be4728",
+                            RoleId = "bb5e0b98-4cee-46f5-8051-a1e2648ce61e"
+                        },
+                        new
+                        {
+                            UserId = "b3664d9e-54ce-4817-94da-2a70b1be4728",
+                            RoleId = "88b02695-c940-414e-94e5-2dff32ab05c9"
+                        },
+                        new
+                        {
+                            UserId = "b3664d9e-54ce-4817-94da-2a70b1be4728",
+                            RoleId = "1a850c5a-28e8-4b76-b852-00622d7c4ad3"
+                        },
+                        new
+                        {
+                            UserId = "6a689db9-70be-44fe-94e9-8e1cbb3e1384",
+                            RoleId = "88b02695-c940-414e-94e5-2dff32ab05c9"
+                        },
+                        new
+                        {
+                            UserId = "6a689db9-70be-44fe-94e9-8e1cbb3e1384",
+                            RoleId = "1a850c5a-28e8-4b76-b852-00622d7c4ad3"
+                        },
+                        new
+                        {
+                            UserId = "e418a535-b7b1-430a-be26-40119159cd8c",
+                            RoleId = "1a850c5a-28e8-4b76-b852-00622d7c4ad3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -295,6 +350,56 @@ namespace Recipes.Core.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "b3664d9e-54ce-4817-94da-2a70b1be4728",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0ed8b95a-c49a-47d3-a6af-074294233458",
+                            Email = "admin@recipes.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@RECIPES.COM",
+                            NormalizedUserName = "ADMIN@RECIPES.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJstpLokNgNGbrPfHOov7hz3U8FEZzcyPJMsbnhbczg4nSmwGRXMyMYVP+2qFfD4+w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a9338a4d-d61d-480e-aeec-6eaa688d0027",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@recipes.com"
+                        },
+                        new
+                        {
+                            Id = "6a689db9-70be-44fe-94e9-8e1cbb3e1384",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bac8b44e-7ca9-4c18-8b93-47a9e2f550dd",
+                            Email = "manager@recipes.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MANAGER@RECIPES.COM",
+                            NormalizedUserName = "MANAGER@RECIPES.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMy4ai80+V9dQvqyHJcuKQMU7FTZx3ELKMiNGDKyZ1W+442+ObzIuueLauzOrYfYMg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "74191975-f490-4441-8d99-64f6c3f91b6d",
+                            TwoFactorEnabled = false,
+                            UserName = "manager@recipes.com"
+                        },
+                        new
+                        {
+                            Id = "e418a535-b7b1-430a-be26-40119159cd8c",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "8c76ee2f-c253-4b8d-81f5-3d204b0be116",
+                            Email = "customer@recipes.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CUSTOMER@RECIPES.COM",
+                            NormalizedUserName = "CUSTOMER@RECIPES.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBUGWcdSNY2KLLpt8ukOu3yKHfrFgkLof0LSK2wYvXLqqWCvjSU2rW/1g1SaUKIQkA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8d11351e-3038-4b13-ac61-c141d6918c3b",
+                            TwoFactorEnabled = false,
+                            UserName = "customer@recipes.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -9,6 +9,12 @@ namespace Recipes.Core
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Seed();
+            base.OnModelCreating(builder);
+        }
         public DbSet<Recipes> Recipes { get; set; }
         public DbSet<InfoDish> InfoDishes { get; set; }
 
