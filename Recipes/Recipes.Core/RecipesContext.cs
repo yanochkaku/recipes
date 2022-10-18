@@ -9,5 +9,8 @@ namespace Recipes.Core
             : base(options)
         {
         }
+        public DbSet<Recipes> Recipes { get; set; }
+        public DbSet<InfoDish> InfoDishes { get; set; }
+
     }
 }
