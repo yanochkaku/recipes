@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Recipes.Core
 {
-    public static class XStatsDbContextExtension
+    public static class RecipesDbContextExtension
     {
         public static void Seed(this ModelBuilder builder)
         {

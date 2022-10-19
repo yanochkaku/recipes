@@ -1,20 +1,39 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Recipes.Core;
-
+using Recipes.Repos;
+using System.Text.Json.Serialization;
+using Recipes.Core;
+using Recipes.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("RecipesConnection");
-builder.Services.AddDbContext<RecipesContext>(options =>
- options.UseSqlServer(connectionString));
+
+builder.Services.AddDbContext<RecipesContext>(options => options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<RecipesContext>();
+builder.Services.AddDefaultIdentity<User>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 5;
+}).AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<RecipesContext>();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddControllersWithViews();
 //builder.Services.AddTransient<UpdateRepository>();
+//builder.Services.AddTransient<LossesRepository>();
+//builder.Services.AddTransient<EqRepository>();
+builder.Services.AddTransient<UsersRepository>();
 
 var app = builder.Build();
 

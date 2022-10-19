@@ -1,0 +1,29 @@
+﻿@using Recipes.Core
+@{
+}
+
+@model List<InfoDish>
+
+<h3>Рецепти</h3>
+<hr />
+@if (Model.Any())
+{
+
+    <ul>
+        @foreach (var infoDish in Model)
+        {
+            <li>@infoDish.Title</li>
+            <li>@infoDish.IconPath</li>
+            <li>@infoDish.Rating</li>
+            <li>@infoDish.Difficulty</li>
+            <li>@infoDish.CookingTime</li>
+            <li>@infoDish.Ingredients</li>
+            <li>@infoDish.Preparation</li>
+        }
+    </ul>
+
+}
+else
+{
+    <div class="alert alert-danger">Задачі відсутні</div>
+}
