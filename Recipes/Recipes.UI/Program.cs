@@ -8,12 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("RecipesConnection");
 builder.Services.AddDbContext<RecipesContext>(options =>
-    options.UseSqlServer(connectionString));
+ options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<RecipesContext>();
 builder.Services.AddControllersWithViews();
+//builder.Services.AddTransient<UpdateRepository>();
 
 var app = builder.Build();
 

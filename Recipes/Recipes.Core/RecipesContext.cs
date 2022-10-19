@@ -15,7 +15,7 @@ namespace Recipes.Core
             builder.Seed();
             base.OnModelCreating(builder);
         }
-        public DbSet<Recipes> Recipes { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<InfoDish> InfoDishes { get; set; }
 
     }

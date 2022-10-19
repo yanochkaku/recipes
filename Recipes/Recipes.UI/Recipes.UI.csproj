@@ -17,6 +17,26 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Recipes.Core\Recipes.Core.csproj" />
+    <ProjectReference Include="..\Recipes.Repos\Recipes.Repos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Photos\Dishes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\Photos\Dishes\farshyrovanyi-perets.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Photos\Dishes\kapusnyak.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Photos\Dishes\kuriachy-grill.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Photos\Dishes\kuryachi_gomilky.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -17,9 +17,6 @@ namespace Recipes.Core
         public string Title { get; set; }
 
         public string? IconPath { get; set; }
-
-        public string AuthorDish { get; set; }
-
         public int Rating { get; set; }
 
         public string Difficulty { get; set; }
@@ -29,8 +26,8 @@ namespace Recipes.Core
         public string Ingredients { get; set; }
 
         public string Preparation { get; set; }
-
-        public Recipes Recipes { get; set; }
+        public int CategoriesId { get; set; }
+        public virtual Category Categories { get; set; }
 
     }
 }

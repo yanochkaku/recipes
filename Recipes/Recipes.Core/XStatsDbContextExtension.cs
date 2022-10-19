@@ -106,6 +106,8 @@ namespace Recipes.Core
                     RoleId = USER_ROLE_ID,
                     UserId = USER_ID
                 });
+            
+           
         }
     }
 }
