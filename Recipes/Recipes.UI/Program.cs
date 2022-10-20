@@ -34,6 +34,7 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddTransient<LossesRepository>();
 //builder.Services.AddTransient<EqRepository>();
 builder.Services.AddTransient<UsersRepository>();
+builder.Services.AddTransient<InfoDishRepository>();
 
 var app = builder.Build();
 
