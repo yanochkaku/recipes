@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Recipes.Core.Migrations
 {
-    public partial class Init2 : Migration
+    public partial class Init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -200,9 +200,9 @@ namespace Recipes.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "543dd803-cd2b-49aa-9f47-153842b4126a", "e57d5e6c-9434-4578-bebc-7e880eaebfbe", "User", "USER" },
-                    { "6b08aebd-f9c2-4039-b80e-57e6846c67ff", "be37278c-1b0c-4f97-bb98-5058448a445d", "Admin", "ADMIN" },
-                    { "78ef7a62-b274-4c71-8437-bf8d89192f81", "5281e937-59bf-48fc-8318-7bb8cd9ac596", "Manager", "MANAGER" }
+                    { "456d3c6a-8e06-4d93-9f06-aa1fac1fc0c6", "d842b113-273f-4c08-b0c4-4160de6b7b12", "Admin", "ADMIN" },
+                    { "9ea7b7b9-f50e-45e4-808d-83678211a6a1", "8271d9a2-d1e8-4280-9676-93fc5da6cf53", "User", "USER" },
+                    { "f32c7921-7b15-4ac2-ae6f-823bb547b419", "0d1fbf0a-a25e-4c38-9c6d-49be31266f59", "Manager", "MANAGER" }
                 });
 
             migrationBuilder.InsertData(
@@ -210,9 +210,9 @@ namespace Recipes.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "05e562fc-476e-450d-aedd-0fd3dd9381f9", 0, "d5070b0e-647d-440a-977a-30adbc2dc991", "manager@recipes.com", true, null, null, false, null, "MANAGER@RECIPES.COM", "MANAGER@RECIPES.COM", "AQAAAAEAACcQAAAAEMCD3qNRDsOeo1ZnCbifQAxYmQ1wj+/WleljOmE+W0wQoE544z8BnQv57xXoXZ9jPA==", null, false, "6a8b95e2-036c-4672-a55f-882f8e09f664", false, "manager@recipes.com" },
-                    { "72a7a3b2-7b1e-4c59-b237-7339b6775cb6", 0, "30c45417-86a6-458c-aebb-f41b22a89ec5", "admin@recipes.com", true, null, null, false, null, "ADMIN@RECIPES.COM", "ADMIN@RECIPES.COM", "AQAAAAEAACcQAAAAEOHgSNMg0f1Zyt+4yLJpQP4h8EtWapBkFZM2UVZLnKcmUjF38c0HeBYSDJ8sqO2JwQ==", null, false, "c1d44190-3d08-4c6d-984e-21743ceda7f3", false, "admin@recipes.com" },
-                    { "a3b15c98-6cd3-4bec-a5c3-3979109f6e69", 0, "32cc89f3-574e-4c1f-b994-c7238d650f47", "customer@recipes.com", true, null, null, false, null, "CUSTOMER@RECIPES.COM", "CUSTOMER@RECIPES.COM", "AQAAAAEAACcQAAAAEHSRxBRY2+apyVeg8c+NC3LemWTOaWhgG0iUq3htXM6gr8ZUnJJIdnpVAmqurrz1hg==", null, false, "4b115aa1-cf81-4df4-a8df-c4228d10c8ac", false, "customer@recipes.com" }
+                    { "0759828d-9804-46fa-88cc-cb54ab59f95e", 0, "2dd5428d-92e7-47f9-af01-9a831c82a42d", "manager@recipes.com", true, null, null, false, null, "MANAGER@RECIPES.COM", "MANAGER@RECIPES.COM", "AQAAAAEAACcQAAAAEN+uDHaw9XViPB37Wv+iwSZDiLAoeTDs0wdbMh8LeCoWvsh2G5wFcp1v24bdmS7Wpw==", null, false, "e30a4074-41c4-4e2c-bf21-c940415acf65", false, "manager@recipes.com" },
+                    { "6ef11d62-7fd9-4dcd-93bc-b2295630a103", 0, "15555c71-7734-4db8-8b75-4e0550feb915", "admin@recipes.com", true, null, null, false, null, "ADMIN@RECIPES.COM", "ADMIN@RECIPES.COM", "AQAAAAEAACcQAAAAEABTS2OTLAoUco/p5jmDW+rgu+y6F3rsrUMT3X8DXa9tU4d8X3JxUN9Pa7AijmSF/w==", null, false, "9c89d900-5b9a-4ba3-9bbe-aae4c62bbac9", false, "admin@recipes.com" },
+                    { "8fde39ce-0776-496b-ae49-1a9504967e7a", 0, "0847cd96-5158-48b7-8172-d80d282ffa16", "customer@recipes.com", true, null, null, false, null, "CUSTOMER@RECIPES.COM", "CUSTOMER@RECIPES.COM", "AQAAAAEAACcQAAAAEEv8nlA+IaN4PXNuEMC0mHsP0qV9Uf0QLbVRP8p4mF75tZ8pHB1WZneWS7gwFuyaaw==", null, false, "d774a4f3-73f7-4c8a-b10d-60815ee737d2", false, "customer@recipes.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -220,12 +220,12 @@ namespace Recipes.Core.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "543dd803-cd2b-49aa-9f47-153842b4126a", "05e562fc-476e-450d-aedd-0fd3dd9381f9" },
-                    { "78ef7a62-b274-4c71-8437-bf8d89192f81", "05e562fc-476e-450d-aedd-0fd3dd9381f9" },
-                    { "543dd803-cd2b-49aa-9f47-153842b4126a", "72a7a3b2-7b1e-4c59-b237-7339b6775cb6" },
-                    { "6b08aebd-f9c2-4039-b80e-57e6846c67ff", "72a7a3b2-7b1e-4c59-b237-7339b6775cb6" },
-                    { "78ef7a62-b274-4c71-8437-bf8d89192f81", "72a7a3b2-7b1e-4c59-b237-7339b6775cb6" },
-                    { "543dd803-cd2b-49aa-9f47-153842b4126a", "a3b15c98-6cd3-4bec-a5c3-3979109f6e69" }
+                    { "9ea7b7b9-f50e-45e4-808d-83678211a6a1", "0759828d-9804-46fa-88cc-cb54ab59f95e" },
+                    { "f32c7921-7b15-4ac2-ae6f-823bb547b419", "0759828d-9804-46fa-88cc-cb54ab59f95e" },
+                    { "456d3c6a-8e06-4d93-9f06-aa1fac1fc0c6", "6ef11d62-7fd9-4dcd-93bc-b2295630a103" },
+                    { "9ea7b7b9-f50e-45e4-808d-83678211a6a1", "6ef11d62-7fd9-4dcd-93bc-b2295630a103" },
+                    { "f32c7921-7b15-4ac2-ae6f-823bb547b419", "6ef11d62-7fd9-4dcd-93bc-b2295630a103" },
+                    { "9ea7b7b9-f50e-45e4-808d-83678211a6a1", "8fde39ce-0776-496b-ae49-1a9504967e7a" }
                 });
 
             migrationBuilder.CreateIndex(

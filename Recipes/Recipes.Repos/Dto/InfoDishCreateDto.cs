@@ -1,20 +1,17 @@
-﻿using System;
+﻿using Recipes.Core;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Recipes.Core
+namespace Recipes.Repos.Dto
 {
-    public class InfoDish
+    public class InfoDishCreateDto
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         public string? IconPath { get; set; }
         public int Rating { get; set; }
@@ -26,8 +23,7 @@ namespace Recipes.Core
         public string? Ingredients { get; set; }
 
         public string? Preparation { get; set; }
+        
        
-        public  Category? Categories { get; set; }
-
     }
 }

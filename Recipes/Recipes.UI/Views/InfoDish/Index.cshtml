@@ -3,22 +3,38 @@
 }
 
 @model List<InfoDish>
-
-<h3>Рецепти</h3>
+<div class="float-end">
+    <a href="/InfoDish/create" class="btn btn-outline-primary">Додати рецепт</a>
+</div>
+<div class="text-center">
+<h3>Каталог кулінарних рецептів</h3>
+</div>
 <hr />
+<br />
+
 @if (Model.Any())
 {
 
     <ul>
         @foreach (var infoDish in Model)
         {
-            <li>@infoDish.Title</li>
-            <li>@infoDish.IconPath</li>
-            <li>@infoDish.Rating</li>
-            <li>@infoDish.Difficulty</li>
-            <li>@infoDish.CookingTime</li>
-            <li>@infoDish.Ingredients</li>
-            <li>@infoDish.Preparation</li>
+                     <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                                      <img class="card-img-top" src="@infoDish.IconPath" alt="@infoDish.Title">
+                                      <div class="card-body">
+                                                 <h5 class="card-title">@infoDish.Title</h5>
+                                                 <p class="card-text">Час приготування: @infoDish.CookingTime</p>
+                                         <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+
+                                                        <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@infoDish.Id">Редагувати</a>
+                                                    <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@infoDish.Id">Деталі</a>
+                                                            <a class="btn btn-sm btn-outline-secondary" asp-action="Delete" asp-route-id="@infoDish.Id">Видалити</a>
+                                            </div>
+                                         </div>
+                                      </div>
+                                    </div>
+                                    </div>
         }
     </ul>
 
