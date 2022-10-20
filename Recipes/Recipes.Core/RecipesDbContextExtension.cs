@@ -61,11 +61,11 @@ namespace Recipes.Core
             var user = new User
             {
                 Id = USER_ID,
-                UserName = "customer@recipes.com",
-                Email = "customer@recipes.com",
+                UserName = "user@recipes.com",
+                Email = "user@recipes.com",
                 EmailConfirmed = true,
-                NormalizedEmail = "customer@recipes.com".ToUpper(),
-                NormalizedUserName = "customer@recipes.com".ToUpper()
+                NormalizedEmail = "user@recipes.com".ToUpper(),
+                NormalizedUserName = "user@recipes.com".ToUpper()
             };
 
             PasswordHasher<User> hasher = new PasswordHasher<User>();
