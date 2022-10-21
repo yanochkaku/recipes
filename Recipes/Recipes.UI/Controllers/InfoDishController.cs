@@ -69,6 +69,8 @@ namespace Recipes.UI.Controllers
             return View(infoDishes);
         }
         [HttpGet]
+        [HttpGet]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Delete(InfoDishCreateDto model)
         {
             return View(model);
@@ -82,6 +84,8 @@ namespace Recipes.UI.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
+        [HttpGet]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(InfoDish model)
         {
             return View(model);
