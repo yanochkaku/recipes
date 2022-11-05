@@ -4,8 +4,15 @@
 @inject UserManager<User> UserManager
 
 <ul class="navbar-nav">
+    <li class="nav-item">
+    <div class="search-btn">
+     <i class="fa fa-search" aria-hidden="true"></i>
+     </div>
+     </li>
+     <br>
 @if (SignInManager.IsSignedIn(User))
 {
+        
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>

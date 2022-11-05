@@ -8,6 +8,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\.vs\VSWorkspaceState.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\.sass-cache\9dcd260a98b05df5e2bbaebb993f2e918e16ad1d\style.scssc" />
+    <None Include="wwwroot\.sass-cache\9dcd260a98b05df5e2bbaebb993f2e918e16ad1d\_fonts.scssc" />
+    <None Include="wwwroot\.sass-cache\9dcd260a98b05df5e2bbaebb993f2e918e16ad1d\_mixin.scssc" />
+    <None Include="wwwroot\.sass-cache\9dcd260a98b05df5e2bbaebb993f2e918e16ad1d\_responsive.scssc" />
+    <None Include="wwwroot\.sass-cache\9dcd260a98b05df5e2bbaebb993f2e918e16ad1d\_theme_color.scssc" />
+    <None Include="wwwroot\.sass-cache\b687762b7660b1f71ae40e600add14c590cfdbc7\style.scssc" />
+    <None Include="wwwroot\.sass-cache\b687762b7660b1f71ae40e600add14c590cfdbc7\_mixin.scssc" />
+    <None Include="wwwroot\.sass-cache\b687762b7660b1f71ae40e600add14c590cfdbc7\_responsive.scssc" />
+    <None Include="wwwroot\.sass-cache\b687762b7660b1f71ae40e600add14c590cfdbc7\_theme_color.scssc" />
+    <None Include="wwwroot\.sass-cache\b687762b7660b1f71ae40e600add14c590cfdbc7\_variables.scssc" />
+    <None Include="wwwroot\.sass-cache\cd34cfe2239c57be653ecbef896fb3750f9e6f5b\style.scssc" />
+    <None Include="wwwroot\.sass-cache\cd34cfe2239c57be653ecbef896fb3750f9e6f5b\_fonts.scssc" />
+    <None Include="wwwroot\.sass-cache\cd34cfe2239c57be653ecbef896fb3750f9e6f5b\_mixin.scssc" />
+    <None Include="wwwroot\.sass-cache\cd34cfe2239c57be653ecbef896fb3750f9e6f5b\_responsive.scssc" />
+    <None Include="wwwroot\.sass-cache\cd34cfe2239c57be653ecbef896fb3750f9e6f5b\_theme_color.scssc" />
+    <None Include="wwwroot\.sass-cache\cd34cfe2239c57be653ecbef896fb3750f9e6f5b\_variables.scssc" />
+    <None Include="wwwroot\.sass-cache\eb65a9acf275cb72706472a84a7409ec6f3ac36a\style.scssc" />
+    <None Include="wwwroot\.sass-cache\eb65a9acf275cb72706472a84a7409ec6f3ac36a\_mixin.scssc" />
+    <None Include="wwwroot\.sass-cache\eb65a9acf275cb72706472a84a7409ec6f3ac36a\_responsive.scssc" />
+    <None Include="wwwroot\.sass-cache\eb65a9acf275cb72706472a84a7409ec6f3ac36a\_theme_color.scssc" />
+    <None Include="wwwroot\.sass-cache\eb65a9acf275cb72706472a84a7409ec6f3ac36a\_variables.scssc" />
+    <None Include="wwwroot\.vs\delicious-master\config\applicationhost.config" />
+    <None Include="wwwroot\.vs\delicious-master\FileContentIndex\edba16da-49e3-4219-ad06-9c7165770f33.vsidx" />
+    <None Include="wwwroot\.vs\delicious-master\FileContentIndex\read.lock" />
+    <None Include="wwwroot\.vs\slnx.sqlite" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
@@ -21,22 +53,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Photos\Dishes\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="wwwroot\Photos\Dishes\farshyrovanyi-perets.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Photos\Dishes\kapusnyak.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Photos\Dishes\kuriachy-grill.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Photos\Dishes\kuryachi_gomilky.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Folder Include="wwwroot\.vs\delicious-master\FileContentIndex\merges\" />
+    <Folder Include="wwwroot\.vs\delicious-master\v17\" />
   </ItemGroup>
 
 </Project>
