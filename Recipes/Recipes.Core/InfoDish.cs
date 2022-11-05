@@ -12,12 +12,11 @@ namespace Recipes.Core
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         public string? IconPath { get; set; }
-        public int Rating { get; set; }
 
         public string? Difficulty { get; set; }
 

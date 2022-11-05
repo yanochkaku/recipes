@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Recipes.Core.Migrations
 {
-    public partial class Init1 : Migration
+    public partial class Init2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,6 +61,19 @@ namespace Recipes.Core.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Difficultys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Difficultys", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,10 +188,9 @@ namespace Recipes.Core.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IconPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rating = table.Column<int>(type: "int", nullable: false),
-                    Difficulty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DifficultyId = table.Column<int>(type: "int", nullable: true),
                     CookingTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Ingredients = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Preparation = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -192,6 +204,11 @@ namespace Recipes.Core.Migrations
                         column: x => x.CategoriesId,
                         principalTable: "Categories",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_InfoDishes_Difficultys_DifficultyId",
+                        column: x => x.DifficultyId,
+                        principalTable: "Difficultys",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -199,9 +216,9 @@ namespace Recipes.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3e15c647-0b77-464c-8251-358a54180684", "5a2f590a-2500-4daf-bc6c-0416f1be49db", "User", "USER" },
-                    { "6c7eb742-c8d6-44b7-bfff-f03aeadf9da3", "6b1a012a-0fa0-4572-aad3-17d6c6f20d67", "Admin", "ADMIN" },
-                    { "c4aeaae6-8010-4845-9643-752039a4b085", "371d8c75-25c2-41e9-b55e-134b81c51738", "Manager", "MANAGER" }
+                    { "52149203-6ebd-4f76-8048-f68ce6328e07", "4167318c-a219-40d6-b006-614535744f18", "Manager", "MANAGER" },
+                    { "5b06e617-a7c8-4a84-9b4f-20e8a4e39f26", "0a735cb9-2b16-4eb4-b8ad-7685e4cb9c21", "Admin", "ADMIN" },
+                    { "fee21d31-b3a6-4862-a122-c1da8ddf9c3d", "cee4cc65-d978-4e7c-9495-f0a300ff5773", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -209,9 +226,9 @@ namespace Recipes.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "0f932773-b658-4bbe-9c67-c12be66abc27", 0, "6c6bf937-5b7e-4c19-a0bb-200082a659a8", "user@recipes.com", true, null, null, false, null, "USER@RECIPES.COM", "USER@RECIPES.COM", "AQAAAAEAACcQAAAAEBVjXtFRS8zVP0ky7zd6ydrfIietLigjcqmx1tL9yKejVbxclF4D3xyk+KvKPMbt6A==", null, false, "c6c4678f-5ffa-45bf-9bec-4d6d52eb50aa", false, "user@recipes.com" },
-                    { "3db160ce-73ed-49d6-a84e-97c5456b05df", 0, "d5a29d9e-a607-474a-9e68-dd1151b5acd5", "admin@recipes.com", true, null, null, false, null, "ADMIN@RECIPES.COM", "ADMIN@RECIPES.COM", "AQAAAAEAACcQAAAAEBBFrAd9DEMngv8JKY7KBdv18p1yVyv8inblsBMQTdGJ4FGNZWL/lkZcGD5UQZgUqA==", null, false, "695c4d9c-3767-4a14-9861-7644960c9b74", false, "admin@recipes.com" },
-                    { "deca6b8a-349a-4eaa-b8a4-6c4a6a92014f", 0, "362a81ac-2423-4ed9-bb3c-8fd1c1a0c8bb", "manager@recipes.com", true, null, null, false, null, "MANAGER@RECIPES.COM", "MANAGER@RECIPES.COM", "AQAAAAEAACcQAAAAEDdCQHni8dgamxCf/ESjC1ABCQF76IPTpqTCHFwiTH3naRnuwtwKOYaxxk8A86b/vQ==", null, false, "0cbd74bd-1425-457b-966a-4f8def081f88", false, "manager@recipes.com" }
+                    { "0874417a-5a52-4903-ac0d-dd1bb5df9b58", 0, "150c401d-5696-4351-992d-d87d55285236", "admin@recipes.com", true, null, null, false, null, "ADMIN@RECIPES.COM", "ADMIN@RECIPES.COM", "AQAAAAEAACcQAAAAEGKEHTfR+tBlZNa+HSdD/N6pcciC7x8Wq7iRDRV4TW1glpVBhjZjs84dkJbl7kv8mQ==", null, false, "db0ff6d2-ed7e-4921-827f-813c7ce3d3f2", false, "admin@recipes.com" },
+                    { "70854597-e73a-41ee-907b-702232d133bf", 0, "a1e64a8d-f1c3-4dc2-bcde-3fd1461866ab", "manager@recipes.com", true, null, null, false, null, "MANAGER@RECIPES.COM", "MANAGER@RECIPES.COM", "AQAAAAEAACcQAAAAEAvFKWptNeLBgcN09b+7gpsdd2xepS9gtFwCp0s0NLiRA8J53UvO1o6LVdcKQpwErQ==", null, false, "c7e82a99-9bb4-49d0-9c4c-51b7e6ee57c9", false, "manager@recipes.com" },
+                    { "d6111961-9c01-4671-aa89-93c118482ca0", 0, "f0850278-7b5b-41d6-b316-98009dccba7b", "user@recipes.com", true, null, null, false, null, "USER@RECIPES.COM", "USER@RECIPES.COM", "AQAAAAEAACcQAAAAEBoFiDihQJe8QbmgNlspsTm3Z6dh/ud77i+2ecI/UpH3T/oPcX9GfOyU72Jl1eQNFQ==", null, false, "1362dc03-bad2-44e0-a2aa-9e317a0cf397", false, "user@recipes.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -219,12 +236,12 @@ namespace Recipes.Core.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "3e15c647-0b77-464c-8251-358a54180684", "0f932773-b658-4bbe-9c67-c12be66abc27" },
-                    { "3e15c647-0b77-464c-8251-358a54180684", "3db160ce-73ed-49d6-a84e-97c5456b05df" },
-                    { "6c7eb742-c8d6-44b7-bfff-f03aeadf9da3", "3db160ce-73ed-49d6-a84e-97c5456b05df" },
-                    { "c4aeaae6-8010-4845-9643-752039a4b085", "3db160ce-73ed-49d6-a84e-97c5456b05df" },
-                    { "3e15c647-0b77-464c-8251-358a54180684", "deca6b8a-349a-4eaa-b8a4-6c4a6a92014f" },
-                    { "c4aeaae6-8010-4845-9643-752039a4b085", "deca6b8a-349a-4eaa-b8a4-6c4a6a92014f" }
+                    { "52149203-6ebd-4f76-8048-f68ce6328e07", "0874417a-5a52-4903-ac0d-dd1bb5df9b58" },
+                    { "5b06e617-a7c8-4a84-9b4f-20e8a4e39f26", "0874417a-5a52-4903-ac0d-dd1bb5df9b58" },
+                    { "fee21d31-b3a6-4862-a122-c1da8ddf9c3d", "0874417a-5a52-4903-ac0d-dd1bb5df9b58" },
+                    { "52149203-6ebd-4f76-8048-f68ce6328e07", "70854597-e73a-41ee-907b-702232d133bf" },
+                    { "fee21d31-b3a6-4862-a122-c1da8ddf9c3d", "70854597-e73a-41ee-907b-702232d133bf" },
+                    { "fee21d31-b3a6-4862-a122-c1da8ddf9c3d", "d6111961-9c01-4671-aa89-93c118482ca0" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -270,6 +287,11 @@ namespace Recipes.Core.Migrations
                 name: "IX_InfoDishes_CategoriesId",
                 table: "InfoDishes",
                 column: "CategoriesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InfoDishes_DifficultyId",
+                table: "InfoDishes",
+                column: "DifficultyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -300,6 +322,9 @@ namespace Recipes.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Difficultys");
         }
     }
 }

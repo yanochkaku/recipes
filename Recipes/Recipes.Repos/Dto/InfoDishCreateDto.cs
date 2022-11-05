@@ -9,12 +9,11 @@ namespace Recipes.Repos.Dto
 {
     public class InfoDishCreateDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string? Title { get; set; }
 
         public string? IconPath { get; set; }
-        public int Rating { get; set; }
 
         public string? Difficulty { get; set; }
 
@@ -23,7 +22,8 @@ namespace Recipes.Repos.Dto
         public string? Ingredients { get; set; }
 
         public string? Preparation { get; set; }
-        
-       
+
+        public Category? Categories { get; set; }
+
     }
 }

@@ -18,11 +18,6 @@
                 <span asp-validation-for="IconPath" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Rating" class="control-label"></label>
-                <input asp-for="Rating" class="form-control" />
-                <span asp-validation-for="Rating" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Difficulty" class="control-label"></label>
                 <input asp-for="Difficulty" class="form-control" />
                 <span asp-validation-for="Difficulty" class="text-danger"></span>
@@ -51,7 +46,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="/infoDish/index">Back to List</a>
 </div>
 
 @section Scripts {

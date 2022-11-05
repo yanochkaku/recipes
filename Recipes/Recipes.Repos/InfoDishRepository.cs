@@ -23,7 +23,7 @@ namespace Recipes.Repos
         {
             _ctx.InfoDishes.Add(infoDish);
             await _ctx.SaveChangesAsync();
-            return _ctx.InfoDishes.FirstOrDefault(x=> x.Title == infoDish.Title);
+            return _ctx.InfoDishes.FirstOrDefault(x => x.Title == infoDish.Title);
         }
 
         public InfoDish GetInfoDish(int id)
@@ -54,12 +54,11 @@ namespace Recipes.Repos
             var infoDish = _ctx.InfoDishes.FirstOrDefault(x => x.Id == updatedInfoDish.Id);
             infoDish.Title = updatedInfoDish.Title;
             infoDish.IconPath = updatedInfoDish.IconPath;
-            infoDish.Rating = updatedInfoDish.Rating;
             infoDish.Difficulty = updatedInfoDish.Difficulty;
             infoDish.CookingTime = updatedInfoDish.CookingTime;
             infoDish.Ingredients = updatedInfoDish.Ingredients;
             infoDish.Preparation = updatedInfoDish.Preparation;
-          
+
             infoDish.Categories = updatedInfoDish.Categories;
             await _ctx.SaveChangesAsync();
         }
@@ -71,16 +70,15 @@ namespace Recipes.Repos
             {
                 Title = title,
                 IconPath = iconPath,
-                Rating = rating,
                 Difficulty = difficulty,
                 CookingTime = cookingTime,
                 Ingredients = ingredients,
                 Preparation = preparation,
-             Categories = category   
+                Categories = category
             };
             _ctx.InfoDishes.Add(newInfoDish);
             await _ctx.SaveChangesAsync();
-           
+
             return await _ctx.InfoDishes.FirstAsync(x => x.Title == title);
         }
     }

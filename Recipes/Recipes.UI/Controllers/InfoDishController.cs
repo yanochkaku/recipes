@@ -45,7 +45,6 @@ namespace Recipes.UI.Controllers
                 {
                     Title = model.Title,
                     IconPath = model.IconPath,
-                    Rating = model.Rating,
                     Difficulty = model.Difficulty,
                     CookingTime = model.CookingTime,
                     Ingredients = model.Ingredients,
@@ -86,9 +85,9 @@ namespace Recipes.UI.Controllers
         [HttpGet]
         [HttpGet]
         [Authorize(Roles = "Admin,Manager")]
-        public async Task<IActionResult> Edit(InfoDish model)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View(model);
+            return View(infoDishRepository.GetInfoDish(id));
         }
         [HttpPost]
         [AutoValidateAntiforgeryToken]

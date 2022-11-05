@@ -10,6 +10,8 @@
 
     <link rel="icon" href="img/core-img/favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="~/wwwroot/css/style.css">
+
 
 </head>
 <body>
@@ -27,17 +29,17 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="InfoDish" asp-action="Index">Каталог</a>
                         </li>
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Користувачі</a>
                         </li>
+                        
                     </ul>
+
                     <partial name="_LoginPartial" />
                 </div>
+               
             </div>
         </nav>
 

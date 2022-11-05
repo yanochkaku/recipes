@@ -12,8 +12,8 @@ using Recipes.Core;
 namespace Recipes.Core.Migrations
 {
     [DbContext(typeof(RecipesContext))]
-    [Migration("20221105182911_Init1")]
-    partial class Init1
+    [Migration("20221105221100_Init2")]
+    partial class Init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,22 +53,22 @@ namespace Recipes.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6c7eb742-c8d6-44b7-bfff-f03aeadf9da3",
-                            ConcurrencyStamp = "6b1a012a-0fa0-4572-aad3-17d6c6f20d67",
+                            Id = "5b06e617-a7c8-4a84-9b4f-20e8a4e39f26",
+                            ConcurrencyStamp = "0a735cb9-2b16-4eb4-b8ad-7685e4cb9c21",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c4aeaae6-8010-4845-9643-752039a4b085",
-                            ConcurrencyStamp = "371d8c75-25c2-41e9-b55e-134b81c51738",
+                            Id = "52149203-6ebd-4f76-8048-f68ce6328e07",
+                            ConcurrencyStamp = "4167318c-a219-40d6-b006-614535744f18",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "3e15c647-0b77-464c-8251-358a54180684",
-                            ConcurrencyStamp = "5a2f590a-2500-4daf-bc6c-0416f1be49db",
+                            Id = "fee21d31-b3a6-4862-a122-c1da8ddf9c3d",
+                            ConcurrencyStamp = "cee4cc65-d978-4e7c-9495-f0a300ff5773",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -165,33 +165,33 @@ namespace Recipes.Core.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "3db160ce-73ed-49d6-a84e-97c5456b05df",
-                            RoleId = "6c7eb742-c8d6-44b7-bfff-f03aeadf9da3"
+                            UserId = "0874417a-5a52-4903-ac0d-dd1bb5df9b58",
+                            RoleId = "5b06e617-a7c8-4a84-9b4f-20e8a4e39f26"
                         },
                         new
                         {
-                            UserId = "3db160ce-73ed-49d6-a84e-97c5456b05df",
-                            RoleId = "c4aeaae6-8010-4845-9643-752039a4b085"
+                            UserId = "0874417a-5a52-4903-ac0d-dd1bb5df9b58",
+                            RoleId = "52149203-6ebd-4f76-8048-f68ce6328e07"
                         },
                         new
                         {
-                            UserId = "3db160ce-73ed-49d6-a84e-97c5456b05df",
-                            RoleId = "3e15c647-0b77-464c-8251-358a54180684"
+                            UserId = "0874417a-5a52-4903-ac0d-dd1bb5df9b58",
+                            RoleId = "fee21d31-b3a6-4862-a122-c1da8ddf9c3d"
                         },
                         new
                         {
-                            UserId = "deca6b8a-349a-4eaa-b8a4-6c4a6a92014f",
-                            RoleId = "c4aeaae6-8010-4845-9643-752039a4b085"
+                            UserId = "70854597-e73a-41ee-907b-702232d133bf",
+                            RoleId = "52149203-6ebd-4f76-8048-f68ce6328e07"
                         },
                         new
                         {
-                            UserId = "deca6b8a-349a-4eaa-b8a4-6c4a6a92014f",
-                            RoleId = "3e15c647-0b77-464c-8251-358a54180684"
+                            UserId = "70854597-e73a-41ee-907b-702232d133bf",
+                            RoleId = "fee21d31-b3a6-4862-a122-c1da8ddf9c3d"
                         },
                         new
                         {
-                            UserId = "0f932773-b658-4bbe-9c67-c12be66abc27",
-                            RoleId = "3e15c647-0b77-464c-8251-358a54180684"
+                            UserId = "d6111961-9c01-4671-aa89-93c118482ca0",
+                            RoleId = "fee21d31-b3a6-4862-a122-c1da8ddf9c3d"
                         });
                 });
 
@@ -232,7 +232,7 @@ namespace Recipes.Core.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Recipes.Core.InfoDish", b =>
+            modelBuilder.Entity("Recipes.Core.Difficulty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -240,14 +240,30 @@ namespace Recipes.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Difficultys");
+                });
+
+            modelBuilder.Entity("Recipes.Core.InfoDish", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+
                     b.Property<int?>("CategoriesId")
                         .HasColumnType("int");
 
                     b.Property<string>("CookingTime")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Difficulty")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("DifficultyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("IconPath")
                         .HasColumnType("nvarchar(max)");
@@ -258,16 +274,14 @@ namespace Recipes.Core.Migrations
                     b.Property<string>("Preparation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriesId");
+
+                    b.HasIndex("DifficultyId");
 
                     b.ToTable("InfoDishes");
                 });
@@ -345,49 +359,49 @@ namespace Recipes.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3db160ce-73ed-49d6-a84e-97c5456b05df",
+                            Id = "0874417a-5a52-4903-ac0d-dd1bb5df9b58",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d5a29d9e-a607-474a-9e68-dd1151b5acd5",
+                            ConcurrencyStamp = "150c401d-5696-4351-992d-d87d55285236",
                             Email = "admin@recipes.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@RECIPES.COM",
                             NormalizedUserName = "ADMIN@RECIPES.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBBFrAd9DEMngv8JKY7KBdv18p1yVyv8inblsBMQTdGJ4FGNZWL/lkZcGD5UQZgUqA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGKEHTfR+tBlZNa+HSdD/N6pcciC7x8Wq7iRDRV4TW1glpVBhjZjs84dkJbl7kv8mQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "695c4d9c-3767-4a14-9861-7644960c9b74",
+                            SecurityStamp = "db0ff6d2-ed7e-4921-827f-813c7ce3d3f2",
                             TwoFactorEnabled = false,
                             UserName = "admin@recipes.com"
                         },
                         new
                         {
-                            Id = "deca6b8a-349a-4eaa-b8a4-6c4a6a92014f",
+                            Id = "70854597-e73a-41ee-907b-702232d133bf",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "362a81ac-2423-4ed9-bb3c-8fd1c1a0c8bb",
+                            ConcurrencyStamp = "a1e64a8d-f1c3-4dc2-bcde-3fd1461866ab",
                             Email = "manager@recipes.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MANAGER@RECIPES.COM",
                             NormalizedUserName = "MANAGER@RECIPES.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDdCQHni8dgamxCf/ESjC1ABCQF76IPTpqTCHFwiTH3naRnuwtwKOYaxxk8A86b/vQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAvFKWptNeLBgcN09b+7gpsdd2xepS9gtFwCp0s0NLiRA8J53UvO1o6LVdcKQpwErQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0cbd74bd-1425-457b-966a-4f8def081f88",
+                            SecurityStamp = "c7e82a99-9bb4-49d0-9c4c-51b7e6ee57c9",
                             TwoFactorEnabled = false,
                             UserName = "manager@recipes.com"
                         },
                         new
                         {
-                            Id = "0f932773-b658-4bbe-9c67-c12be66abc27",
+                            Id = "d6111961-9c01-4671-aa89-93c118482ca0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6c6bf937-5b7e-4c19-a0bb-200082a659a8",
+                            ConcurrencyStamp = "f0850278-7b5b-41d6-b316-98009dccba7b",
                             Email = "user@recipes.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@RECIPES.COM",
                             NormalizedUserName = "USER@RECIPES.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBVjXtFRS8zVP0ky7zd6ydrfIietLigjcqmx1tL9yKejVbxclF4D3xyk+KvKPMbt6A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBoFiDihQJe8QbmgNlspsTm3Z6dh/ud77i+2ecI/UpH3T/oPcX9GfOyU72Jl1eQNFQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c6c4678f-5ffa-45bf-9bec-4d6d52eb50aa",
+                            SecurityStamp = "1362dc03-bad2-44e0-a2aa-9e317a0cf397",
                             TwoFactorEnabled = false,
                             UserName = "user@recipes.com"
                         });
@@ -450,10 +464,21 @@ namespace Recipes.Core.Migrations
                         .WithMany("infoDish")
                         .HasForeignKey("CategoriesId");
 
+                    b.HasOne("Recipes.Core.Difficulty", "Difficulty")
+                        .WithMany("infoDish")
+                        .HasForeignKey("DifficultyId");
+
                     b.Navigation("Categories");
+
+                    b.Navigation("Difficulty");
                 });
 
             modelBuilder.Entity("Recipes.Core.Category", b =>
+                {
+                    b.Navigation("infoDish");
+                });
+
+            modelBuilder.Entity("Recipes.Core.Difficulty", b =>
                 {
                     b.Navigation("infoDish");
                 });
