@@ -1,78 +1,91 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Recipes.Core;
+﻿using Recipes.Core;
 using Recipes.Repos;
 using Recipes.Repos.Dto;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Data;
 using System.Drawing.Drawing2D;
 
 namespace Recipes.UI.Controllers
 {
     public class InfoDishController : Controller
-    {   
+    {
         private readonly InfoDishRepository infoDishRepository;
-        private readonly RecipesContext _context;
-        
-        public InfoDishController(InfoDishRepository infoDishRepository, RecipesContext context)
+        private readonly CategoryRepository categoryRepository;
+
+        public InfoDishController(InfoDishRepository infoDishRepository, CategoryRepository categoryRepository)
         {
             this.infoDishRepository = infoDishRepository;
-            _context = context;
+            this.categoryRepository = categoryRepository;
         }
 
         [HttpGet]
         public IActionResult Index()
-        {          
-            var infoDishes = infoDishRepository.GetInfoDishes();
-            return View(infoDishes);
+        {
+            var infoDish = infoDishRepository.GetInfoDishes();
+            return View(infoDish);
         }
+
         [HttpGet]
-        [Authorize(Roles = "Admin,Manager")]
         public IActionResult Create()
         {
+            ViewBag.Categories = categoryRepository.GetCategories();
             return View();
         }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Create(InfoDishCreateDto model)
+        public async Task<IActionResult> Create(InfoDishCreateDto infoDishCreateDto, string categories)
         {
-            
+            ViewBag.Categories = categoryRepository.GetCategories();
             if (ModelState.IsValid)
             {
-                var infoDish = infoDishRepository.GetInfoDishByName(model.Title);
-                var category = _context.Categories.FirstOrDefault(x => x.Id == 1);
-                var infoDish1 = await infoDishRepository.AddInfoDishAsync(new InfoDish()
+                var category = categoryRepository.GetCategoryByName(categories);
+                if (category == null)
                 {
-                    Title = model.Title,
-                    IconPath = model.IconPath,
-                    Difficulty = model.Difficulty,
-                    CookingTime = model.CookingTime,
-                    Ingredients = model.Ingredients,
-                    Preparation = model.Preparation,
-                    Categories = category
+                    category = new Category() { NameCategory = categories };
+                    category = await categoryRepository.AddCategoryAsync(category);
+                }
+
+                var infoDish = await infoDishRepository.AddInfoDishAsync(new InfoDish()
+                {
+                    Title = infoDishCreateDto.Title,
+                    IconPath = infoDishCreateDto.IconPath,
+                    Difficulty = infoDishCreateDto.Difficulty,
+                    CookingTime = infoDishCreateDto.CookingTime,
+                    Ingredients = infoDishCreateDto.Ingredients,
+                    Preparation = infoDishCreateDto.Preparation,
+                    Categories = category,
                 });
 
-            
-            
-            return RedirectToAction("Edit", "InfoDishes", new { id = infoDish1.Id });
+                return RedirectToAction("Edit", "InfoDish", new { id = infoDish.Id });
             }
-            return View(model);
+            return View(infoDishCreateDto);
         }
-        public IActionResult Detail(int id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null) return NotFound();
+            ViewBag.Categories = categoryRepository.GetCategories();
+            return View(await infoDishRepository.GetInfoDishDto(id));
+        }
 
-            var infoDishes = _context.InfoDishes
-                .FirstOrDefault(x => x.Id == id);
-            if (infoDishes == null) return NotFound();
-            return View(infoDishes);
-        }
-        [HttpGet]
-        [HttpGet]
-        [Authorize(Roles = "Admin,Manager")]
-        public async Task<IActionResult> Delete(InfoDishCreateDto model)
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Edit(InfoDishCreateDto model, string categories)
         {
+            if (ModelState.IsValid)
+            {
+                await infoDishRepository.UpdateAsync(model, categories);
+                return RedirectToAction("Index");
+            }
+            ViewBag.Categories = categoryRepository.GetCategories();
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return View(await infoDishRepository.GetInfoDishDto(id));
         }
 
         [HttpPost]
@@ -82,26 +95,5 @@ namespace Recipes.UI.Controllers
             await infoDishRepository.DeleteInfoDishAsync(id);
             return RedirectToAction("Index");
         }
-        [HttpGet]
-        [HttpGet]
-        [Authorize(Roles = "Admin,Manager")]
-        public async Task<IActionResult> Edit(int id)
-        {
-            return View(infoDishRepository.GetInfoDish(id));
-        }
-        [HttpPost]
-        [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> ConfirmEdit(InfoDish model)
-        {
-            if (ModelState.IsValid)
-            {
-                await infoDishRepository.UpdateInfoDishAsync(model);
-                return RedirectToAction("Index");
-
-            }
-            return View(model);
-        }
-
     }
-
 }

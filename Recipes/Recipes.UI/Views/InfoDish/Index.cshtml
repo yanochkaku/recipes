@@ -7,22 +7,21 @@
     <a href="/InfoDish/create" class="btn btn-outline-primary">Додати рецепт</a>
 </div>
 <div class="text-center">
-<h3>Каталог кулінарних рецептів</h3>
+    <h3>Каталог кулінарних рецептів</h3>
 </div>
 <hr />
 <br />
-
  <section class="best-receipe-area">
        <tbody>
         <div class="container row">
-            @foreach (var infoDish in Model)
+            @foreach (var item in Model)
             {
                           <div class="col-12 col-sm-6 col-lg-4">
                             <div class="single-best-receipe-area mb-30">
-                                 <img src="@infoDish.IconPath" alt="">
+                                 <img src="@item.IconPath" alt="">
                                     <div class="receipe-content">
                                         <a href="receipe-post.html">
-                                            <h5 class="card-title">@infoDish.Title</h5>
+                                            <h5 class="card-title">@item.Title</h5>
                                         </a>
                                             <div class="ratings">
                                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -35,9 +34,9 @@
                                 <br>
                                              <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@infoDish.Id">Редагувати</a>
-                                                    <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@infoDish.Id">Деталі</a>
-                                                    <a class="btn btn-sm btn-outline-secondary" asp-action="Delete" asp-route-id="@infoDish.Id">Видалити</a>
+                                                    <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id">Редагувати</a>
+                                                    <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id">Деталі</a>
+                                                    <a class="btn btn-sm btn-outline-secondary" asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
                                                 </div>
                                              </div>
                             </div>

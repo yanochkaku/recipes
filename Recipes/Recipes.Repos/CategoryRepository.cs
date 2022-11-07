@@ -1,4 +1,5 @@
 ﻿using Recipes.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +17,20 @@ namespace Recipes.Repos
             this._ctx = _ctx;
         }
 
-        public async Task AddCategoryAsync(Category category)
+        public async Task<Category> AddCategoryAsync(Category category)
         {
             _ctx.Categories.Add(category);
             await _ctx.SaveChangesAsync();
+            return _ctx.Categories.FirstOrDefault(x => x.NameCategory == category.NameCategory);
         }
 
         public Category GetCategory(int id)
         {
             return _ctx.Categories.FirstOrDefault(x => x.Id == id);
+        }
+        public Category GetCategoryByName(string name)
+        {
+            return _ctx.Categories.FirstOrDefault(x => x.NameCategory == name);
         }
 
         public List<Category> GetCategories()

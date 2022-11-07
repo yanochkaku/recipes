@@ -17,6 +17,6 @@ namespace Recipes.Core
         public string? NameCategory { get; set; }
 
 
-        public List<InfoDish>? infoDish { get; set; }
+        public virtual ICollection<InfoDish>? infoDish { get; set; }
     }
 }

@@ -1,28 +1,67 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Recipes.Core;
+﻿using Recipes.Core;
+using Recipes.Repos;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Drawing.Drawing2D;
 
-namespace Recipes.UI.Controllers
+namespace KeyShop.UI.Controllers
 {
     public class CategoryController : Controller
     {
+        private readonly CategoryRepository _categoryRepository;
+        public CategoryController(CategoryRepository categoryRepository)
+        {
+            _categoryRepository = categoryRepository;
+        }
+
         public IActionResult Index()
         {
-            List<Category> AllCategories = new List<Category>
-            {
-            };
+            var categories = _categoryRepository.GetCategories();
+            return View(categories);
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
             return View();
         }
-        public IEnumerable<Category> AllCategories
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Create(Category category)
         {
-            get
+            if (ModelState.IsValid)
             {
-                return new List<Category>
-                {
-                    new Category { NameCategory = "Перші страви"},
-                    new Category { NameCategory = "Другі страви"},
-                    new Category { NameCategory = "Десерти"}
-                };
+                var createdCategories = await _categoryRepository.AddCategoryAsync(category);
+                return RedirectToAction("Edit", "Category", new { id = createdCategories.Id });
             }
+            return View(category);
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View(_categoryRepository.GetCategory(id));
+        }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Edit(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                await _categoryRepository.UpdateCategoryAsync(category);
+                return RedirectToAction("Index");
+            }
+            return View(category);
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(_categoryRepository.GetCategory(id));
+        }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Delete(Category category)
+        {
+            await _categoryRepository.DeleteCategoryAsync(category.Id);
+            return RedirectToAction("Index");
         }
     }
 }

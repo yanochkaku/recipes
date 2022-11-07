@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Recipes.Core;
+using Recipes.Repos.Dto;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Recipes.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +15,6 @@ namespace Recipes.Repos
     public class InfoDishRepository
     {
         private readonly RecipesContext _ctx;
-
         public InfoDishRepository(RecipesContext _ctx)
         {
             this._ctx = _ctx;
@@ -23,23 +24,17 @@ namespace Recipes.Repos
         {
             _ctx.InfoDishes.Add(infoDish);
             await _ctx.SaveChangesAsync();
-            return _ctx.InfoDishes.FirstOrDefault(x => x.Title == infoDish.Title);
+            return _ctx.InfoDishes.Include(x => x.Categories).FirstOrDefault(x => x.Title == infoDish.Title);
         }
 
         public InfoDish GetInfoDish(int id)
         {
             return _ctx.InfoDishes.Include(x => x.Categories).FirstOrDefault(x => x.Id == id);
-
-        }
-        public InfoDish GetInfoDishByName(string name)
-        {
-            return _ctx.InfoDishes.Include(x => x.Categories).FirstOrDefault(x => x.Title == name);
-
         }
 
         public List<InfoDish> GetInfoDishes()
         {
-            var infoDishList = _ctx.InfoDishes.ToList();
+            var infoDishList = _ctx.InfoDishes.Include(x => x.Categories).ToList();
             return infoDishList;
         }
 
@@ -58,28 +53,44 @@ namespace Recipes.Repos
             infoDish.CookingTime = updatedInfoDish.CookingTime;
             infoDish.Ingredients = updatedInfoDish.Ingredients;
             infoDish.Preparation = updatedInfoDish.Preparation;
-
             infoDish.Categories = updatedInfoDish.Categories;
             await _ctx.SaveChangesAsync();
         }
 
-        public async Task<InfoDish> CreateInfoDishAsync(string? title, string? iconPath, int rating, string? difficulty, string? cookingTime, string? ingredients, string? preparation, int categoriesId)
+        public async Task<InfoDishCreateDto> GetInfoDishDto(int id)
         {
-            var category = _ctx.Categories.FirstOrDefault(x => x.Id == 1);
-            var newInfoDish = new InfoDish
-            {
-                Title = title,
-                IconPath = iconPath,
-                Difficulty = difficulty,
-                CookingTime = cookingTime,
-                Ingredients = ingredients,
-                Preparation = preparation,
-                Categories = category
-            };
-            _ctx.InfoDishes.Add(newInfoDish);
-            await _ctx.SaveChangesAsync();
+            var i = await _ctx.InfoDishes.Include(x => x.Categories).FirstAsync(x => x.Id == id);
 
-            return await _ctx.InfoDishes.FirstAsync(x => x.Title == title);
+            var infoDishDto = new InfoDishCreateDto
+            {
+                Id = i.Id,
+                Title = i.Title,
+                IconPath = i.IconPath,
+                Difficulty = i.Difficulty,
+                CookingTime = i.CookingTime,
+                Ingredients = i.Ingredients,
+                Preparation = i.Preparation,
+                Categories = i.Categories,
+            };
+            return infoDishDto;
+        }
+
+        public async Task UpdateAsync(InfoDishCreateDto model, string categories)
+        {
+            var infoDish = _ctx.InfoDishes.Include(x => x.Categories).FirstOrDefault(x => x.Id == model.Id);
+            if (infoDish.Title != model.Title)
+                infoDish.Title = model.Title;
+            if (infoDish.IconPath != model.IconPath)
+                infoDish.IconPath = model.IconPath;
+            if (infoDish.Difficulty != model.Difficulty)
+                infoDish.CookingTime = model.CookingTime;
+            if (infoDish.Ingredients != model.Ingredients)
+                infoDish.Ingredients = model.Ingredients;
+            if (infoDish.Preparation != model.Preparation)
+                infoDish.Preparation = model.Preparation;
+            if (infoDish.Categories != model.Categories)
+                infoDish.Categories = _ctx.Categories.FirstOrDefault(x => x.NameCategory == categories);
+            _ctx.SaveChanges();
         }
     }
 }
