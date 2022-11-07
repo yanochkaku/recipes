@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Data;
 using System.Drawing.Drawing2D;
+using Microsoft.EntityFrameworkCore;
 
 namespace Recipes.UI.Controllers
 {
@@ -12,6 +13,7 @@ namespace Recipes.UI.Controllers
     {
         private readonly InfoDishRepository infoDishRepository;
         private readonly CategoryRepository categoryRepository;
+        private readonly RecipesContext rContext;
 
         public InfoDishController(InfoDishRepository infoDishRepository, CategoryRepository categoryRepository)
         {
@@ -94,6 +96,18 @@ namespace Recipes.UI.Controllers
         {
             await infoDishRepository.DeleteInfoDishAsync(id);
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Details(int id)
+        {
+            return View(await infoDishRepository.GetInfoDishDto(id));
+        }
+        public async Task<IActionResult> ConfirmDetails(int id)
+        {
+            if ( id == null) return NotFound();
+            var infoDish = rContext.InfoDishes.Include(x => x.Categories).FirstOrDefault(x => x.Id == id);
+            if (infoDish == null) return NotFound();
+
+            return View(infoDish);
         }
     }
 }

@@ -92,5 +92,11 @@ namespace Recipes.Repos
                 infoDish.Categories = _ctx.Categories.FirstOrDefault(x => x.NameCategory == categories);
             _ctx.SaveChanges();
         }
+
+
+        public InfoDish GetInfoDishById(int ID)
+        {
+            return _ctx.InfoDishes.FirstOrDefault(x => x.Id == ID);
+        }
     }
 }
