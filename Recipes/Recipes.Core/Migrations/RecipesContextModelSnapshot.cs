@@ -51,22 +51,37 @@ namespace Recipes.Core.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< Updated upstream
                             Id = "9f138bb5-2f5d-4919-a8f5-a26007d84eee",
                             ConcurrencyStamp = "a2000922-b777-4917-b048-533d3ee55d37",
+=======
+                            Id = "f2db02f7-1fb7-45fa-8929-8a13002ad5b6",
+                            ConcurrencyStamp = "e0fd0926-b19f-432e-9475-55340757debf",
+>>>>>>> Stashed changes
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
+<<<<<<< Updated upstream
                             Id = "17f1efb3-c24d-41f9-a1b3-46f4508cda42",
                             ConcurrencyStamp = "667f5fc2-c4f8-445b-af81-c9840d368a64",
+=======
+                            Id = "5b994991-8ebe-4455-8ec6-6153ead77c98",
+                            ConcurrencyStamp = "e69f0e04-d50d-4edf-81b5-222e92b81d00",
+>>>>>>> Stashed changes
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
+<<<<<<< Updated upstream
                             Id = "640a86e2-28ba-4b46-ac08-313fa07a1af3",
                             ConcurrencyStamp = "e2b582b4-0577-47b3-b806-c4650e70c545",
+=======
+                            Id = "049a4302-e700-42a6-a940-50ac34d3119e",
+                            ConcurrencyStamp = "c3cb07b0-d870-4717-a24c-e39cc96f59de",
+>>>>>>> Stashed changes
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -163,6 +178,7 @@ namespace Recipes.Core.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< Updated upstream
                             UserId = "7a512027-4a1b-4973-a06f-34fbf92b29d8",
                             RoleId = "9f138bb5-2f5d-4919-a8f5-a26007d84eee"
                         },
@@ -190,6 +206,35 @@ namespace Recipes.Core.Migrations
                         {
                             UserId = "5db8c868-2c51-4928-b263-d04de8eeab4e",
                             RoleId = "640a86e2-28ba-4b46-ac08-313fa07a1af3"
+=======
+                            UserId = "77eee32a-53c3-4b24-b14b-ef0d2fb92397",
+                            RoleId = "f2db02f7-1fb7-45fa-8929-8a13002ad5b6"
+                        },
+                        new
+                        {
+                            UserId = "77eee32a-53c3-4b24-b14b-ef0d2fb92397",
+                            RoleId = "5b994991-8ebe-4455-8ec6-6153ead77c98"
+                        },
+                        new
+                        {
+                            UserId = "77eee32a-53c3-4b24-b14b-ef0d2fb92397",
+                            RoleId = "049a4302-e700-42a6-a940-50ac34d3119e"
+                        },
+                        new
+                        {
+                            UserId = "0d999b5d-bd65-44e3-85a8-f600c38196f9",
+                            RoleId = "5b994991-8ebe-4455-8ec6-6153ead77c98"
+                        },
+                        new
+                        {
+                            UserId = "0d999b5d-bd65-44e3-85a8-f600c38196f9",
+                            RoleId = "049a4302-e700-42a6-a940-50ac34d3119e"
+                        },
+                        new
+                        {
+                            UserId = "e9a8c52e-1985-470a-a144-8a706acf4b54",
+                            RoleId = "049a4302-e700-42a6-a940-50ac34d3119e"
+>>>>>>> Stashed changes
                         });
                 });
 
@@ -339,49 +384,85 @@ namespace Recipes.Core.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< Updated upstream
                             Id = "7a512027-4a1b-4973-a06f-34fbf92b29d8",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "4dc29f15-5001-40d8-a0be-d8d2fac19209",
+=======
+                            Id = "77eee32a-53c3-4b24-b14b-ef0d2fb92397",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0a5a5f5a-f8d6-4388-84ea-a8dba03cf3b0",
+>>>>>>> Stashed changes
                             Email = "admin@recipes.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@RECIPES.COM",
                             NormalizedUserName = "ADMIN@RECIPES.COM",
+<<<<<<< Updated upstream
                             PasswordHash = "AQAAAAEAACcQAAAAEGXHKQgdOFS54kTZwatsNwLc1izLPo891sew7SR0Asrd8PQz3FslEGuerLXFTXR+NA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "150518a4-63c3-4b63-999b-96eff6f93a5f",
+=======
+                            PasswordHash = "AQAAAAEAACcQAAAAEFg4xmKNneu17R8r5jraUM+V5/xeMjK3XVxfjAH5aFDFd+QtXjEgdeXg0L3ecLFeag==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "66de81e8-9049-4fc7-af49-ae914960752b",
+>>>>>>> Stashed changes
                             TwoFactorEnabled = false,
                             UserName = "admin@recipes.com"
                         },
                         new
                         {
+<<<<<<< Updated upstream
                             Id = "fdac4d46-e51a-47b3-92e9-ee272eaa1451",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "18f942f8-1ab3-4de4-a570-19b39ae004bf",
+=======
+                            Id = "0d999b5d-bd65-44e3-85a8-f600c38196f9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a436e9eb-431d-490b-812e-5519cc4f3128",
+>>>>>>> Stashed changes
                             Email = "manager@recipes.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MANAGER@RECIPES.COM",
                             NormalizedUserName = "MANAGER@RECIPES.COM",
+<<<<<<< Updated upstream
                             PasswordHash = "AQAAAAEAACcQAAAAEE3zYRoiQeCdp4jJwA0qM5Y8H35b3DXrA/K/2brHm96tftFK00R+t5oHM+PEfHL9DQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "f636ff43-a734-44f7-b417-e5549d8da110",
+=======
+                            PasswordHash = "AQAAAAEAACcQAAAAEMJx6Lz++IE+FYgFM7ZRJR1Aw/oz4EcnTl8NRdZDpL56xTiVcZsxbWpTitHN2c7ruQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5061513f-6fd1-4f04-83ff-3a0efe6bd11c",
+>>>>>>> Stashed changes
                             TwoFactorEnabled = false,
                             UserName = "manager@recipes.com"
                         },
                         new
                         {
+<<<<<<< Updated upstream
                             Id = "5db8c868-2c51-4928-b263-d04de8eeab4e",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "731d192e-c90f-4a9c-b2ec-2855a6480db8",
+=======
+                            Id = "e9a8c52e-1985-470a-a144-8a706acf4b54",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a2451a92-02c7-454a-9a11-6bbc12427960",
+>>>>>>> Stashed changes
                             Email = "user@recipes.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@RECIPES.COM",
                             NormalizedUserName = "USER@RECIPES.COM",
+<<<<<<< Updated upstream
                             PasswordHash = "AQAAAAEAACcQAAAAEOpXX0bPnu/SEoHNDlG999lCbLn8Tv1IiBweFGeELO9AE11HyWemk6UdifDDyzdteg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "93a8e3a1-7966-4006-b9cf-1f2b0d56e740",
+=======
+                            PasswordHash = "AQAAAAEAACcQAAAAEFq/8dCZ45QEPcGbkqBTaOvsVC0VR+dIC8FxtWubdeCQmZfHh4cyRPaJv7ShgZNf9w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6f1eebd4-5b31-4154-a1da-e5adeefeb739",
+>>>>>>> Stashed changes
                             TwoFactorEnabled = false,
                             UserName = "user@recipes.com"
                         });
