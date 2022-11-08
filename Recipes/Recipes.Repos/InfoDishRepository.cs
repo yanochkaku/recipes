@@ -94,9 +94,25 @@ namespace Recipes.Repos
         }
 
 
-        public InfoDish GetInfoDishById(int ID)
+        public async Task<InfoDishCreateDto> GetInfoDishById(int id)
         {
-            return _ctx.InfoDishes.FirstOrDefault(x => x.Id == ID);
+            var infoDish = await _ctx.InfoDishes.FindAsync(id);
+            if(infoDish != null)
+            {
+                var Details = new InfoDishCreateDto()
+                {
+                    Id = infoDish.Id,
+                    Title = infoDish.Title,
+                    IconPath = infoDish.IconPath,
+                    Difficulty = infoDish.Difficulty,
+                    CookingTime = infoDish.CookingTime,
+                    Ingredients = infoDish.Ingredients,
+                    Preparation = infoDish.Preparation,
+                    Categories = infoDish.Categories,
+                };
+                return Details;
+            }
+            return null;
         }
     }
 }
