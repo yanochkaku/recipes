@@ -23,6 +23,8 @@ namespace Recipes.Repos.Dto
 
         public string? Preparation { get; set; }
 
+        public virtual InfoDishTag? Tags { get; set; }
+
         public Category? Categories { get; set; }
 
     }

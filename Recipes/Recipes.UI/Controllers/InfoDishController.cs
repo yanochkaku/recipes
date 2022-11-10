@@ -13,12 +13,15 @@ namespace Recipes.UI.Controllers
     {
         private readonly InfoDishRepository infoDishRepository;
         private readonly CategoryRepository categoryRepository;
+        private readonly TagsRepository tagsRepository;
         private readonly RecipesContext rContext;
 
-        public InfoDishController(InfoDishRepository infoDishRepository, CategoryRepository categoryRepository)
+        public InfoDishController(InfoDishRepository infoDishRepository, TagsRepository tagsRepository, CategoryRepository categoryRepository)
         {
             this.infoDishRepository = infoDishRepository;
+            this.tagsRepository = tagsRepository;
             this.categoryRepository = categoryRepository;
+            
         }
 
         [HttpGet]
@@ -31,23 +34,32 @@ namespace Recipes.UI.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Tags = tagsRepository.GetTags();
             ViewBag.Categories = categoryRepository.GetCategories();
             return View();
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Create(InfoDishCreateDto infoDishCreateDto, string categories)
+        public async Task<IActionResult> Create(InfoDishCreateDto infoDishCreateDto, string tags, string categories)
         {
-            ViewBag.Categories = categoryRepository.GetCategories();
+            ViewBag.Tags = tagsRepository.GetTags();
+            ViewBag.Categories = categoryRepository.GetCategories();          
             if (ModelState.IsValid)
             {
+                var tag = tagsRepository.GetTagsByName(tags);
+                if (tag == null)
+                {
+                    tag = new InfoDishTag() { Title = tags };
+                    tag = await tagsRepository.AddTagsAsync(tag);
+                }
                 var category = categoryRepository.GetCategoryByName(categories);
                 if (category == null)
                 {
                     category = new Category() { NameCategory = categories };
                     category = await categoryRepository.AddCategoryAsync(category);
                 }
+                
 
                 var infoDish = await infoDishRepository.AddInfoDishAsync(new InfoDish()
                 {
@@ -56,7 +68,8 @@ namespace Recipes.UI.Controllers
                     Difficulty = infoDishCreateDto.Difficulty,
                     CookingTime = infoDishCreateDto.CookingTime,
                     Ingredients = infoDishCreateDto.Ingredients,
-                    Preparation = infoDishCreateDto.Preparation,
+                    Preparation = infoDishCreateDto.Preparation,                  
+                    Tags = tag,
                     Categories = category,
                 });
 
@@ -67,19 +80,21 @@ namespace Recipes.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            ViewBag.Tags = tagsRepository.GetTags();
             ViewBag.Categories = categoryRepository.GetCategories();
             return View(await infoDishRepository.GetInfoDishDto(id));
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Edit(InfoDishCreateDto model, string categories)
+        public async Task<IActionResult> Edit(InfoDishCreateDto model, string categories, string tags)
         {
             if (ModelState.IsValid)
             {
-                await infoDishRepository.UpdateAsync(model, categories);
+                await infoDishRepository.UpdateAsync(model, categories, tags);
                 return RedirectToAction("Index");
             }
+            ViewBag.Tags = tagsRepository.GetTags();
             ViewBag.Categories = categoryRepository.GetCategories();
             return View(model);
         }

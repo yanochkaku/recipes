@@ -36,6 +36,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<UsersRepository>();
 builder.Services.AddTransient<InfoDishRepository>();
 builder.Services.AddTransient<CategoryRepository>();
+builder.Services.AddTransient<TagsRepository>();
 
 var app = builder.Build();
 

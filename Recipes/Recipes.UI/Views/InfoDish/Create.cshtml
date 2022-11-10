@@ -2,6 +2,8 @@
  @model Recipes.Core.InfoDish
 @{
     var categories = ViewBag.Categories as IEnumerable<Category>;
+    var tags = ViewBag.Tags as IEnumerable<InfoDishTag>;
+
 }
 
 <h4>Додати рецепт</h4>
@@ -41,6 +43,29 @@
                 <input asp-for="Preparation" class="form-control" />
                 <span asp-validation-for="Preparation" class="text-danger"></span>
             </div>
+            <div class="wrapper">
+                <label asp-for="Tags" class="form-label"></label>
+                <div class="title">
+                    <img src="tag.svg" alt="icon">
+                    <h2>Tags</h2>
+                </div>
+                <div class="content">
+                    <p>Press enter or add a comma after each tag</p>
+                    <select class="form-select" size="3" id="tags" name="tags">
+                        @foreach (var c in tags)
+                        {
+                            <option value="@c.Title">@c.Title</option>
+                        }
+                    </select>
+                    <ul><input type="text" spellcheck="false"></ul>
+                </div>
+                <div class="details">
+                    <p><span>10</span> tags are remaining</p>
+                    <button>Remove All</button>
+                </div>
+            </div>
+            <script src="script.js"></script>
+            
             <div class="mb-3">
                 <label asp-for="Categories" class="form-label"></label>
                 <select class="form-select" size="3" id="categories" name="categories">
@@ -67,10 +92,110 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+
     }
     <script>
         $(function() {
             $(".form-select").select2();
         });
+
+        /* Import Google Font - Poppins */
+        src = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap";
+        * {
+            margin: 0;
+            padding: 0;
+            box- sizing: border - box;
+        font - family: 'Poppins', sans - serif;
+        }
+        body{
+            display: flex;
+            align - items: center;
+            justify - content: center;
+            min - height: 100vh;
+            background: #5372F0;
+        }
+        ::selection{
+            color: #fff;
+            background: #5372F0;
+        }
+        .wrapper{
+            width: 496px;
+            background: #fff;
+            border - radius: 10px;
+            padding: 18px 25px 20px;
+            box - shadow: 0 0 30px rgba(0, 0, 0, 0.06);
+        }
+        .wrapper: where(.title, li, li i, .details){
+            display: flex;
+            align - items: center;
+        }
+        .title img{
+            max - width: 21px;
+        }
+        .title h2{
+            font - size: 21px;
+            font - weight: 600;
+            margin - left: 8px;
+        }
+        .wrapper.content{
+            margin: 10px 0;
+        }
+        .content p{
+            font - size: 15px;
+        }
+        .content ul{
+            display: flex;
+            flex - wrap: wrap;
+            padding: 7px;
+            margin: 12px 0;
+            border - radius: 5px;
+            border: 1px solid #a6a6a6;
+        }
+        .content ul  li{
+            color: #333;
+            margin: 4px 3px;
+            list - style: none;
+            border - radius: 5px;
+            background: #F2F2F2;
+            padding: 5px 8px 5px 10px;
+            border: 1px solid #e3e1e1;
+        }
+        .content ul li i{
+            height: 20px;
+            width: 20px;
+            color: #808080;
+            margin - left: 8px;
+            font - size: 12px;
+            cursor: pointer;
+            border - radius: 50 %;
+            background: #dfdfdf;
+            justify - content: center;
+        }
+        .content ul input{
+            flex: 1;
+            padding: 5px;
+            border: none;
+            outline: none;
+            font - size: 16px;
+        }
+        .wrapper.details{
+            justify - content: space - between;
+        }
+        .details button{
+            border: none;
+            outline: none;
+            color: #fff;
+            font - size: 14px;
+            cursor: pointer;
+            padding: 9px 15px;
+            border - radius: 5px;
+            background: #5372F0;
+            transition: background 0.3s ease;
+        }
+        .details button:hover{
+            background: #2c52ed;
+        }
     </script>
+
 }
