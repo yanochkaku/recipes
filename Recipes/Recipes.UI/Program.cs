@@ -10,10 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("RecipesConnection");
-
 builder.Services.AddDbContext<RecipesContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddSession(option =>
+{
+    option.IdleTimeout = TimeSpan.FromMinutes(3600);
+    option.Cookie.IsEssential = true;
+});
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
@@ -36,7 +41,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<UsersRepository>();
 builder.Services.AddTransient<InfoDishRepository>();
 builder.Services.AddTransient<CategoryRepository>();
-builder.Services.AddTransient<TagsRepository>();
+builder.Services.AddTransient<SaveRepository>();
+builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+
 
 var app = builder.Build();
 
@@ -54,7 +62,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthentication();

@@ -3,7 +3,10 @@
 @model Recipes.Repos.Dto.InfoDishCreateDto
 @{
     var categories = ViewBag.Categories as IEnumerable<Category>;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="icon" href="img/core-img/favicon.ico">
+  <link rel="stylesheet" href="style.css">
 <h4>Редагувати</h4>
 <hr />
 <div class="row">

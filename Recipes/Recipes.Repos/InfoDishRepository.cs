@@ -24,18 +24,18 @@ namespace Recipes.Repos
         {
             _ctx.InfoDishes.Add(infoDish);
             await _ctx.SaveChangesAsync();
-            return _ctx.InfoDishes.Include(x => x.Tags).Include(x => x.Categories).FirstOrDefault(x => x.Title == infoDish.Title);
+            return _ctx.InfoDishes.Include(x => x.Categories).FirstOrDefault(x => x.Title == infoDish.Title);
             
         }
 
         public InfoDish GetInfoDish(int id)
         {
-            return _ctx.InfoDishes.Include(x => x.Tags).Include(x => x.Categories).FirstOrDefault(x => x.Id == id);
+            return _ctx.InfoDishes.Include(x => x.Categories).FirstOrDefault(x => x.Id == id);
         }
 
         public List<InfoDish> GetInfoDishes()
         {
-            var infoDishList = _ctx.InfoDishes.Include(x => x.Tags).Include(x => x.Categories).ToList();
+            var infoDishList = _ctx.InfoDishes.Include(x => x.Categories).ToList();
             return infoDishList;
         }
 
@@ -54,14 +54,13 @@ namespace Recipes.Repos
             infoDish.CookingTime = updatedInfoDish.CookingTime;
             infoDish.Ingredients = updatedInfoDish.Ingredients;
             infoDish.Preparation = updatedInfoDish.Preparation;
-            infoDish.Tags = updatedInfoDish.Tags;
             infoDish.Categories = updatedInfoDish.Categories;
             await _ctx.SaveChangesAsync();
         }
 
         public async Task<InfoDishCreateDto> GetInfoDishDto(int id)
         {
-            var i = await _ctx.InfoDishes.Include(x => x.Tags).Include(x => x.Categories).FirstAsync(x => x.Id == id);
+            var i = await _ctx.InfoDishes.Include(x => x.Categories).FirstAsync(x => x.Id == id);
 
             var infoDishDto = new InfoDishCreateDto
             {
@@ -72,15 +71,14 @@ namespace Recipes.Repos
                 CookingTime = i.CookingTime,
                 Ingredients = i.Ingredients,
                 Preparation = i.Preparation,
-                Tags = i.Tags,
                 Categories = i.Categories,
             };
             return infoDishDto;
         }
 
-        public async Task UpdateAsync(InfoDishCreateDto model, string tags, string categories)
+        public async Task UpdateAsync(InfoDishCreateDto model, string categories)
         {
-            var infoDish = _ctx.InfoDishes.Include(x => x.Tags).Include(x => x.Categories).FirstOrDefault(x => x.Id == model.Id);
+            var infoDish = _ctx.InfoDishes.Include(x => x.Categories).FirstOrDefault(x => x.Id == model.Id);
             if (infoDish.Title != model.Title)
                 infoDish.Title = model.Title;
             if (infoDish.IconPath != model.IconPath)
@@ -91,8 +89,6 @@ namespace Recipes.Repos
                 infoDish.Ingredients = model.Ingredients;
             if (infoDish.Preparation != model.Preparation)
                 infoDish.Preparation = model.Preparation;
-            if (infoDish.Tags != model.Tags)
-                infoDish.Tags = _ctx.Tags.FirstOrDefault(x => x.Title == tags);
             if (infoDish.Categories != model.Categories)
                 infoDish.Categories = _ctx.Categories.FirstOrDefault(x => x.NameCategory == categories);
             _ctx.SaveChanges();
@@ -113,7 +109,6 @@ namespace Recipes.Repos
                     CookingTime = infoDish.CookingTime,
                     Ingredients = infoDish.Ingredients,
                     Preparation = infoDish.Preparation,
-                    Tags = infoDish.Tags,
                     Categories = infoDish.Categories,
                 };
                 return Details;

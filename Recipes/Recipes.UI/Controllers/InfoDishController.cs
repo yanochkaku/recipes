@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Data;
 using System.Drawing.Drawing2D;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Diagnostics;
+using System;
 
 namespace Recipes.UI.Controllers
 {
@@ -13,13 +16,11 @@ namespace Recipes.UI.Controllers
     {
         private readonly InfoDishRepository infoDishRepository;
         private readonly CategoryRepository categoryRepository;
-        private readonly TagsRepository tagsRepository;
         private readonly RecipesContext rContext;
 
-        public InfoDishController(InfoDishRepository infoDishRepository, TagsRepository tagsRepository, CategoryRepository categoryRepository)
+        public InfoDishController(InfoDishRepository infoDishRepository, CategoryRepository categoryRepository)
         {
             this.infoDishRepository = infoDishRepository;
-            this.tagsRepository = tagsRepository;
             this.categoryRepository = categoryRepository;
             
         }
@@ -34,25 +35,18 @@ namespace Recipes.UI.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Tags = tagsRepository.GetTags();
             ViewBag.Categories = categoryRepository.GetCategories();
             return View();
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Create(InfoDishCreateDto infoDishCreateDto, string tags, string categories)
+        public async Task<IActionResult> Create(InfoDishCreateDto infoDishCreateDto, string categories)
         {
-            ViewBag.Tags = tagsRepository.GetTags();
             ViewBag.Categories = categoryRepository.GetCategories();          
             if (ModelState.IsValid)
             {
-                var tag = tagsRepository.GetTagsByName(tags);
-                if (tag == null)
-                {
-                    tag = new InfoDishTag() { Title = tags };
-                    tag = await tagsRepository.AddTagsAsync(tag);
-                }
+                
                 var category = categoryRepository.GetCategoryByName(categories);
                 if (category == null)
                 {
@@ -69,7 +63,6 @@ namespace Recipes.UI.Controllers
                     CookingTime = infoDishCreateDto.CookingTime,
                     Ingredients = infoDishCreateDto.Ingredients,
                     Preparation = infoDishCreateDto.Preparation,                  
-                    Tags = tag,
                     Categories = category,
                 });
 
@@ -80,21 +73,19 @@ namespace Recipes.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Tags = tagsRepository.GetTags();
             ViewBag.Categories = categoryRepository.GetCategories();
             return View(await infoDishRepository.GetInfoDishDto(id));
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Edit(InfoDishCreateDto model, string categories, string tags)
+        public async Task<IActionResult> Edit(InfoDishCreateDto model, string categories)
         {
             if (ModelState.IsValid)
             {
-                await infoDishRepository.UpdateAsync(model, categories, tags);
+                await infoDishRepository.UpdateAsync(model, categories);
                 return RedirectToAction("Index");
             }
-            ViewBag.Tags = tagsRepository.GetTags();
             ViewBag.Categories = categoryRepository.GetCategories();
             return View(model);
         }
@@ -117,6 +108,27 @@ namespace Recipes.UI.Controllers
             var info = await infoDishRepository.GetInfoDishDto(id);
             return View(info);
         }
-        
+
+        public async Task<IActionResult> Search(string title, string difficulty, string cookingTime)
+        {
+            HttpClient client = new();
+
+            string path = this.Request.Scheme + "://" + this.Request.Host.Value + "/api/search/" + title + "/" + difficulty + "/" + cookingTime;
+            Debug.WriteLine("Search API path: " + path);
+
+            IEnumerable<InfoDish> dishes = null;
+
+            HttpResponseMessage response = await client.GetAsync(path);
+
+            if (response.IsSuccessStatusCode)
+            {
+                dishes = JsonConvert.DeserializeObject<IEnumerable<InfoDish>>(await response.Content.ReadAsStringAsync());
+
+                ViewBag.Search = true;
+            }
+
+            return View("Index", dishes);
+        }
+
     }
 }

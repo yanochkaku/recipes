@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Recipes.Core;
 using Recipes.Repos.Dto;
+using System.Security.Claims;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +14,22 @@ using System.Threading.Tasks;
 
 namespace Recipes.Repos
 {
+
     public class UsersRepository
     {
         private readonly RecipesContext _ctx;
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UsersRepository(RecipesContext ctx,
             UserManager<User> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor)
         {
             _ctx = ctx;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<User> CreateUserAsync(string? firstName, string? lastName, string? password, string? email)
@@ -43,6 +50,15 @@ namespace Recipes.Repos
             return await _ctx.Users.FirstAsync(x => x.Email == email);
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<User> GetCurrentUser()
+        {
+            var current_user = _httpContextAccessor.HttpContext.User.Identity.Name;
+            var user = await userManager.FindByNameAsync(current_user);
+            return user;
+
+        }
         public async Task DeleteUserAsync(string id)
         {
             var user = _ctx.Users.Find(id);
